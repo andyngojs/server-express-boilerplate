@@ -1,5 +1,9 @@
-import {userRouter} from './userRoute'
+import userRouter from './user.route';
+import walletRouter from './wallet.route';
 
-export function apiRouter(app) {
-  app.use('/apiUser', userRouter)
+function Router(app) {
+  app.use('/apiUser', userRouter);
+  app.use('/apiWallet', walletRouter);
 }
+
+export default Router;

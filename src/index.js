@@ -1,29 +1,33 @@
-import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
-import helmet from 'helmet'
-import morgan from 'morgan'
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
 // config
-import {corsOptions} from '~/config/corsConfig'
+import corsOptions from '~/config/cors.config';
+import accessLogStream from './config/accessLog.config';
 // routes
-import {apiRouter} from './routes'
+import Router from './routes';
 
-const app = express()
+const isProduction = process.env.NODE_ENV === 'production';
+const app = express();
 
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 // Using Cors to allow some specific origins (other domains) request to server.
-app.use(cors(corsOptions))
-// Using helmet
-app.use(helmet())
+app.use(cors(corsOptions));
+// Using helmet to security for app
+app.use(helmet());
 // Using Morgan to log all requests
-app.use(morgan('combined'))
+app.use(
+  isProduction ? morgan('combined', {stream: accessLogStream}) : morgan('dev'),
+);
 
-// apiRouter to manage all routers of api
-apiRouter(app)
+// Router init
+Router(app);
 
 app.listen(process.env.APP_PORT, process.env.APP_HOSTNAME, () => {
   console.log(
     `Server is running at http://${process.env.APP_HOSTNAME}:${process.env.APP_PORT}`,
-  )
-})
+  );
+});
