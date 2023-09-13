@@ -8,4 +8,10 @@ walletRouter.get('/', (req, res) => {
   });
 });
 
+walletRouter.post('create', (req, res) => {
+  res.json({
+    message: 'Created new wallet successful',
+  });
+});
+
 export default walletRouter;
