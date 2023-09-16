@@ -1,17 +1,12 @@
 import {Router} from 'express';
+import {
+  createNewWalletController,
+  getAllWalletsController,
+} from '~/controllers/wallet.controller';
 
 const walletRouter = Router();
 
-walletRouter.get('/', (req, res) => {
-  res.json({
-    message: 'api manage wallet',
-  });
-});
-
-walletRouter.post('create', (req, res) => {
-  res.json({
-    message: 'Created new wallet successful',
-  });
-});
+walletRouter.get('/getAllWallets', getAllWalletsController);
+walletRouter.post('/create', createNewWalletController);
 
 export default walletRouter;
