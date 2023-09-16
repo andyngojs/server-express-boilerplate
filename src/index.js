@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 import 'dotenv/config';
 import express from 'express';
+import exitHook from 'async-exit-hook';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 // config
 import corsOptions from '~/config/cors.config';
 import accessLogStream from '~/config/accessLog.config';
-import {CONNECT_DB, GET_DB} from '~/config/db.config';
+import {CONNECT_DB, CLOSE_DB} from '~/config/db.config';
 // routes
 import Router from './routes';
 
@@ -36,6 +37,13 @@ function START_SERVER() {
     console.log(
       `Server is running at http://${process.env.APP_HOSTNAME}:${process.env.APP_PORT}`,
     );
+  });
+
+  /**
+   * Implement to cleans-up tasks before it use the Server
+   */
+  exitHook(() => {
+    CLOSE_DB();
   });
 }
 

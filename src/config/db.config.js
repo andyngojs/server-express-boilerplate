@@ -18,6 +18,13 @@ export const CONNECT_DB = async () => {
 };
 
 /**
+ * Close connection to Database when it needs
+ */
+export const CLOSE_DB = async () => {
+  await mongoClientInstance.close();
+};
+
+/**
  * This function GET_DB (not Async function), it exports Database Instance after connected to MongoDB successfully
  * to use it at anywhere.
  * Note: Make sure this function calls only after it connected to MongoDB successfully.
