@@ -25,7 +25,8 @@ export const CLOSE_DB = async () => {
 };
 
 /**
- * This function GET_DB (not Async function), it exports Database Instance after connected to MongoDB successfully
+ * This function GET_DB (not Async function),
+ * it exports Database Instance after connected to MongoDB successfully
  * to use it at anywhere.
  * Note: Make sure this function calls only after it connected to MongoDB successfully.
  * @returns mExpensesDatabaseInstance

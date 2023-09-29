@@ -11,8 +11,8 @@ import accessLogStream from '~/config/accessLog.config';
 import {CONNECT_DB, CLOSE_DB} from '~/config/db.config';
 // routes
 import Router from './routes';
-
-const isProduction = process.env.NODE_ENV === 'production';
+// constants
+import {APP_PORT, APP_HOSTNAME, isProduction} from '~/constants/env';
 
 function START_SERVER() {
   const app = express();
@@ -33,9 +33,9 @@ function START_SERVER() {
   // Router init
   Router(app);
 
-  app.listen(process.env.APP_PORT, process.env.APP_HOSTNAME, () => {
+  app.listen(APP_PORT, APP_HOSTNAME, () => {
     console.log(
-      `Server is running at http://${process.env.APP_HOSTNAME}:${process.env.APP_PORT}`,
+      `Server is running at http://${APP_HOSTNAME}:${APP_PORT}`,
     );
   });
 

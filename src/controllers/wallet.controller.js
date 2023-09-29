@@ -2,7 +2,9 @@ export const getAllWalletsController = (req, res) => {
   res.json({
     status: 200,
     message: 'Successfully',
-    data: [],
+    data: {
+      message: 'Hello world!',
+    },
   });
 };
 
