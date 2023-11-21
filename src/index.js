@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import 'dotenv/config';
 import express from 'express';
 import exitHook from 'async-exit-hook';
 import cors from 'cors';
@@ -10,7 +9,7 @@ import corsOptions from '~/config/cors.config';
 import accessLogStream from '~/config/accessLog.config';
 import {CONNECT_DB, CLOSE_DB} from '~/config/db.config';
 // routes
-import Router from './routes';
+import Router from '~/routes';
 // constants
 import {APP_PORT, APP_HOSTNAME, isProduction} from '~/constants/env';
 
@@ -34,9 +33,7 @@ function START_SERVER() {
   Router(app);
 
   app.listen(APP_PORT, APP_HOSTNAME, () => {
-    console.log(
-      `Server is running at http://${APP_HOSTNAME}:${APP_PORT}`,
-    );
+    console.log(`Server is running at http://${APP_HOSTNAME}:${APP_PORT}`);
   });
 
   /**
